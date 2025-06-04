@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 
-import client from "../../../../apollo-client";
+import client from "../../../graphql/apollo-client";
 import gql from "graphql-tag";
 import { useParams } from "next/navigation";
 import Lightbox from "yet-another-react-lightbox";
@@ -37,7 +37,7 @@ export default function Animal() {
   const params = useParams();
   const [animal, setAnimal] = useState<AnimalData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const [index, setIndex] = useState<number>(0);
 
@@ -51,7 +51,7 @@ export default function Animal() {
           query GetPortfolioById($id: ID!) {
             zwierze(id: $id, idType: DATABASE_ID) {
               title
-         
+
               databaseId
               featuredImage {
                 node {
@@ -74,10 +74,13 @@ export default function Animal() {
             }
           }
         `,
-        variables: { id }, // 👈 Pass the ID variable here
+        variables: { id },
       });
-    
+
       setAnimal(data.zwierze);
+      if (!data.zwierze) {
+        setError(true);
+      }
       setLoading(false);
     };
     fetchData();
@@ -88,12 +91,15 @@ export default function Animal() {
   if (error || !animal) return <Error />;
 
   const allImages = [
-    { src: process.env.NEXT_PUBLIC_API_IMAGES_URL + animal.featuredImage.node.uri },
+    {
+      src:
+        process.env.NEXT_PUBLIC_API_IMAGES_URL + animal.featuredImage.node.uri,
+    },
     ...animal.zwierzetaAcf.galeria.nodes.map((img) => ({
       src: process.env.NEXT_PUBLIC_API_IMAGES_URL + img.uri,
     })),
   ];
-console.log("Animal data:", animal.featuredImage.node.uri); // 👀
+  console.log("Animal data:", animal.featuredImage.node.uri); // 👀
   return (
     <div className="container py-16">
       <div>
@@ -117,7 +123,10 @@ console.log("Animal data:", animal.featuredImage.node.uri); // 👀
               Galeria
             </h5>
             <img
-              src={process.env.NEXT_PUBLIC_API_IMAGES_URL + animal.featuredImage.node.uri}
+              src={
+                process.env.NEXT_PUBLIC_API_IMAGES_URL +
+                animal.featuredImage.node.uri
+              }
               alt="Główne zdjęcie zwierzaka"
               className="w-full max-h-[500px] md:max-h-[600px] border-img object-cover  cursor-pointer "
               onClick={() => {
@@ -176,7 +185,7 @@ console.log("Animal data:", animal.featuredImage.node.uri); // 👀
           <h3 className="font-semibold text-[24px] leading-[32px]">
             Zapytaj o adopcję
           </h3>
-          <div></div>
+
           <ContactForm additionalStyles="md:w-full" />
           <p className="text-sm">
             Adopcja zwierzaka to odpowiedzialna decyzja, która daje mu drugą

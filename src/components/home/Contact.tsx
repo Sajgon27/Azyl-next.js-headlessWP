@@ -84,7 +84,7 @@ export default function Contact() {
           </span>
         </div>
 
-        <ContactForm/>
+        <ContactForm />
       </div>
     </>
   );

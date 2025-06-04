@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { usePathname} from "next/navigation";
+import { usePathname } from "next/navigation";
 
 import Button from "../ui/Button";
 
@@ -67,7 +67,6 @@ export default function Header() {
           </Link>
         </nav>
 
-        {/* Support Button */}
         <div className="hidden md:block">
           <Button
             href="https://zrzutka.pl/cag4dx"
@@ -77,7 +76,6 @@ export default function Header() {
           />
         </div>
 
-        {/* Mobile Menu Button */}
         <button
           className="md:hidden"
           onClick={() => setIsOpen(!isOpen)}

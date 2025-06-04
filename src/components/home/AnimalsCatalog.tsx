@@ -7,7 +7,7 @@ import Button from "../ui/Button";
 import Loading from "../ui/Loading";
 import Error from "../ui/Error";
 import { gql } from "@apollo/client";
-import client from "../../../apollo-client";
+import client from "../../graphql/apollo-client";
 
 function AnimalsCatalog() {
   const [animals, setAnimals] = useState([] as any[]);
@@ -22,7 +22,7 @@ function AnimalsCatalog() {
             zwierzeta {
               nodes {
                 title
-             
+
                 databaseId
                 featuredImage {
                   node {
@@ -34,21 +34,22 @@ function AnimalsCatalog() {
                   wiek
                   plec
                   typ
-                 
                 }
               }
             }
           }
         `,
       });
-      console.log("GRAPHQL DATA:", data.zwierzeta.nodes[0].zwierzetaAcf.typ[0]); // 👀
+      
       setAnimals(data.zwierzeta.nodes);
+      if(!data.zwierzeta) {
+        setError(true);
+      }
       setLoading(false);
     };
     fetchData();
   }, []);
 
- 
   const [visibleCount, setVisibleCount] = useState(6);
   const [psyOrKoty, setPsyOrKoty] = useState("Pies");
 
@@ -58,12 +59,11 @@ function AnimalsCatalog() {
     setVisibleCount(6);
   };
 
-
-
   const filteredAnimals = animals.filter(
-      (animal: any) => animal.zwierzetaAcf.typ[0] === psyOrKoty
-    );
-    console.log("Filtered Animals:", filteredAnimals); 
+    (animal: any) => animal.zwierzetaAcf.typ[0] === psyOrKoty
+  );
+  console.log("Filtered Animals:", filteredAnimals);
+
 
   return (
     <div id="adoption" className="container py-20">
@@ -92,7 +92,9 @@ function AnimalsCatalog() {
           />
         </div>
       </div>
-    {  loading && <Loading />}
+       {error && <Error />}
+      {loading && <Loading />}
+     
       <div>
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-8 sm:gap-y-16 mt-10"
@@ -142,7 +144,8 @@ function AnimalsCatalog() {
               >
                 <AnimalCard
                   image={
-                    process.env.NEXT_PUBLIC_API_IMAGES_URL + animal.featuredImage.node.uri
+                    process.env.NEXT_PUBLIC_API_IMAGES_URL +
+                    animal.featuredImage.node.uri
                   }
                   name={animal.title}
                   href={`/do-adopcji/${animal.databaseId}`}
