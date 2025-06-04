@@ -4,8 +4,8 @@
 import { ReactNode, useEffect } from "react";
 import { AuthProvider, useAuth } from "@/context/AuthContext";
 import { useRouter , usePathname } from "next/navigation";
-import AdminHeader from "./header";
-import Loading from "@/components/ui/loading";
+import AdminHeader from "../../components/admin/Header"; 
+import Loading from "@/components/ui/Loading";
 
 type LayoutProps = {
   children: ReactNode;
@@ -18,10 +18,10 @@ const ProtectedContent = ({ children }: LayoutProps) => {
 
   useEffect(() => {
     if ( !isAuthenticated) {
-      router.push("/auth/login");
+      //router.push("/auth/login");
     }
     
-  }, [pathname]);
+  }, [pathname]); 
 
   if (isLoading) {
     return <Loading/>

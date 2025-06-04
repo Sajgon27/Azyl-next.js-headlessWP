@@ -6,8 +6,8 @@ import { useParams } from "next/navigation";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import ContactForm from "@/components/ContactForm";
-import Loading from "@/components/ui/loading";
-import Error from "@/components/ui/error";
+import Loading from "@/components/ui/Loading";
+import Error from "@/components/ui/Error";
 
 interface AnimalData {
   id: number;

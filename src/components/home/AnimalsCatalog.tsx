@@ -3,8 +3,8 @@ import useFetchAnimals from "../../hooks/useFetchAnimals";
 import { motion, AnimatePresence } from "framer-motion";
 import AnimalCard from "../AnimalCard";
 import Button from "../ui/Button";
-import Loading from "../ui/loading";
-import Error from "../ui/error";
+import Loading from "../ui/Loading";
+import Error from "../ui/Error";
 
 function AnimalsCatalog() {
   const { animals, loading, error } = useFetchAnimals();

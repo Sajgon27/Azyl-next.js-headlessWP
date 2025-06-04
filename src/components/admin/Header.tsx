@@ -21,7 +21,7 @@ export default function AdminHeader() {
     }
   }
 
-  if (!isAuthenticated || isLoading) {
+  if (pathname === "/auth/login" ) {
     return; // or redirect to login page
   }
 
@@ -35,10 +35,10 @@ export default function AdminHeader() {
               <img alt="Your Company" src="/logo.png" className="size-14" />
             </div>
             <ul className="flex gap-8">
-              <li className="bg-red-400 text-white cursor-pointer hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+              <li className="bg-primary text-white cursor-pointer hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
                 <Link href="/auth/panel">Lista zwierząt</Link>
               </li>
-              <li className="bg-red-400 text-white cursor-pointer hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+              <li className="bg-primary text-white cursor-pointer hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
                 <Link href="/auth/add-animal">Dodaj zwierzę</Link>
               </li>
             </ul>
@@ -46,9 +46,10 @@ export default function AdminHeader() {
         
             <div>
               <form onSubmit={handleLogout}>
+                
                 <button
                   type="submit"
-                  className="bg-red-600 cursor-pointer text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                  className="bg-primary cursor-pointer text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                 >
                   Wyloguj się
                 </button>

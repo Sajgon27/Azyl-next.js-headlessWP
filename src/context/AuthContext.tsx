@@ -48,7 +48,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         setIsAuthenticated(true);
       })
       .catch(() => {
-        setIsAuthenticated(false);
+      
+        if (pathname === "/auth/panel" || pathname === "/auth/add-animal") {
+          router.push("/auth/login");
+        }
+          setIsAuthenticated(false);
       })
       .finally(() => {
         setIsLoading(false);

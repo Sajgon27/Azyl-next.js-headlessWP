@@ -4,8 +4,9 @@ import useFetchAnimals from "@/hooks/useFetchAnimals";
 import { useState, useEffect } from "react";
 import Modal from "@/components/Modal";
 import axiosConfig from "../../../../axiosConfig";
-import Error from "@/components/ui/error";
-import Loading from "@/components/ui/loading";
+import Error from "@/components/ui/Error";
+import Loading from "@/components/ui/Loading";
+
 
 interface Animal {
   id: number;
@@ -19,9 +20,10 @@ export default function Dashboard() {
   const [animals, setAnimals] = useState<Animal[]>([]); // Local state for UI updates
   const [selectedAnimal, setSelectedAnimal] = useState<Animal | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  
 
-  // **Set animals when data is loaded**
   useEffect(() => {
+   
     if (initialAnimals) {
       setAnimals(
         initialAnimals.map((animal) => ({
@@ -93,13 +95,13 @@ export default function Dashboard() {
                   </div>
                   <div className="flex items-center gap-8">
                     <Link
-                      className="bg-indigo-300 cursor-pointer px-5 py-2 rounded"
-                      href="/edit"
+                      className="bg-blue-400 text-white cursor-pointer px-5 py-2 rounded"
+                      href={`/auth/edit/${animal.id}`}
                     >
                       Edytuj
                     </Link>
                     <button
-                      className="text-white cursor-pointer rounded bg-red-800 px-5 py-2"
+                      className="text-white cursor-pointer rounded bg-primary px-5 py-2"
                       onClick={() => openModal(animal)}
                     >
                       Usuń
