@@ -1,13 +1,54 @@
-import { useState } from "react";
-import useFetchAnimals from "../../hooks/useFetchAnimals";
+"use client";
+import { useEffect, useState } from "react";
+
 import { motion, AnimatePresence } from "framer-motion";
 import AnimalCard from "../AnimalCard";
 import Button from "../ui/Button";
 import Loading from "../ui/Loading";
 import Error from "../ui/Error";
+import { gql } from "@apollo/client";
+import client from "../../../apollo-client";
 
 function AnimalsCatalog() {
-  const { animals, loading, error } = useFetchAnimals();
+  const [animals, setAnimals] = useState([] as any[]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    const fetchData = async () => {
+      const { data } = await client.query({
+        query: gql`
+          query GetZwierzes {
+            zwierzeta {
+              nodes {
+                title
+             
+                databaseId
+                featuredImage {
+                  node {
+                    id
+                    uri
+                  }
+                }
+                zwierzetaAcf {
+                  wiek
+                  plec
+                  typ
+                 
+                }
+              }
+            }
+          }
+        `,
+      });
+      console.log("GRAPHQL DATA:", data.zwierzeta.nodes[0].zwierzetaAcf.typ[0]); // 👀
+      setAnimals(data.zwierzeta.nodes);
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
+
+ 
   const [visibleCount, setVisibleCount] = useState(6);
   const [psyOrKoty, setPsyOrKoty] = useState("Pies");
 
@@ -17,11 +58,12 @@ function AnimalsCatalog() {
     setVisibleCount(6);
   };
 
+
+
   const filteredAnimals = animals.filter(
-    (animal: any) => animal.type === psyOrKoty
-  );
-
-
+      (animal: any) => animal.zwierzetaAcf.typ[0] === psyOrKoty
+    );
+    console.log("Filtered Animals:", filteredAnimals); 
 
   return (
     <div id="adoption" className="container py-20">
@@ -50,16 +92,10 @@ function AnimalsCatalog() {
           />
         </div>
       </div>
-
-{loading && (
-  <Loading/>
-)}
-{error && (
-  <Error/>
-)}
+    {  loading && <Loading />}
       <div>
         <motion.div
-          className="relative flex flex-wrap justify-between  gap-x-2 sm:gap-x-4 gap-y-8 sm:gap-y-16 mt-10"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-8 sm:gap-y-16 mt-10"
           initial="hidden"
           animate="visible"
           exit="exit"
@@ -82,7 +118,7 @@ function AnimalsCatalog() {
           <AnimatePresence mode="popLayout">
             {filteredAnimals.slice(0, visibleCount).map((animal: any) => (
               <motion.div
-                key={animal.id}
+                key={animal.databaseId}
                 initial="hidden"
                 animate="visible"
                 exit="exit"
@@ -102,16 +138,16 @@ function AnimalsCatalog() {
                     transition: { duration: 0.3, ease: "easeInOut" },
                   },
                 }}
-                className="w-[calc(50%-0.5rem)] md:w-[calc(33.33%-1.5rem)] relative"
+                className="relative"
               >
                 <AnimalCard
                   image={
-                    process.env.NEXT_PUBLIC_API_IMAGES_URL + animal.main_image
+                    process.env.NEXT_PUBLIC_API_IMAGES_URL + animal.featuredImage.node.uri
                   }
-                  name={animal.name}
-                  href={`/do-adopcji/${animal.id}`}
-                  age={animal.age}
-                  sex={animal.sex}
+                  name={animal.title}
+                  href={`/do-adopcji/${animal.databaseId}`}
+                  age={animal.zwierzetaAcf.wiek}
+                  sex={animal.zwierzetaAcf.plec[0]}
                 />
               </motion.div>
             ))}

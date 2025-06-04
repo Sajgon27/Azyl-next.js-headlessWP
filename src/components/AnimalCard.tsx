@@ -12,8 +12,8 @@ interface AnimalCardProps {
 
 function AnimalCard({ href, name, age, sex, image }: AnimalCardProps) {
   return (
-    <Link href={href} className="flex flex-col ">
-        <img className="w-full hover:scale-[1.01] transition-transform duration-700 ease-in-out object-cover h-[210px] sm:h-[300px] md:h-[420px] border-img" src={image}/>
+    <Link  href={href} className="flex flex-col ">
+        <img className="w-full hover:scale-[1.01] transition-transform duration-700 ease-in-out object-cover h-[320px] sm:h-[300px] md:h-[420px] border-img" src={image}/>
         <h5 className="text-[16px] sm:text-[20px] font-bold mt-4 mb-2">{name}</h5>
         <div className="flex justify-between flex-col gap-2 lg:flex-row text-[14px] sm:text-base">
             <span className="flex gap-2">Wiek: {age} <Image src="/icons/calendar.svg" width={20} height={20} alt="Kalendarz"/></span>

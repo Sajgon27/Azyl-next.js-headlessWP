@@ -36,17 +36,13 @@ export default function Footer() {
         <div className="w-1/2 md:w-[70%]">
           <ul className="flex flex-col md:flex-row font-semibold text-md items-start md:items-center justify-end gap-4 lg:gap-8">
             <li>
-              <button
-                className="text-left"
-              >
-                Zwierzęta do adopcji
-              </button>
+                 <Link href="/#adoption">Zwierzęta do adopcji</Link> 
             </li>
             <li>
               <Link href="/galeria">Galeria</Link>
             </li>
             <li>
-              <button>O nas</button>
+                   <Link href="/#about">O nas</Link> 
             </li>
             <li>
               <a
@@ -58,7 +54,7 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <button >Kontakt</button>
+              <Link href="/#contact">Kontakt</Link> 
             </li>
           </ul>
           <div className="hidden md:flex items-center justify-end gap-2 mt-6 text-black/50 text-sm">
@@ -67,7 +63,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="flex pb-2 pt-6 w-full md:hidden flex-col-reverse items-center justify-center gap-2 mt-6 text-black/50 text-sm">
-          <span className="text-[0.8rem] font-bold">
+          <span className="text-[0.8rem] text-center font-bold">
             © 2025 Azyl Psów Zapomnianych w Wołczynie
           </span>
          

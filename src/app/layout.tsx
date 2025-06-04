@@ -2,6 +2,9 @@ import React from "react";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -20,7 +23,11 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <body className={`} ${inter.variable} antialiased`}>{children}</body>
+      <body className={`} ${inter.variable} antialiased`}>
+        <ScrollToTop />
+        <Header />
+        {children} <Footer />
+      </body>
     </html>
   );
 }

@@ -9,11 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.13.8",
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
     "@tailwindcss/vite": "^4.0.7",
     "axios": "^1.7.9",
     "framer-motion": "^12.4.7",
+    "graphql": "^16.11.0",
     "lucide-react": "^0.475.0",
     "next": "15.3.2",
     "react": "^19.0.0",

@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 
-import axios from "axios";
+import client from "../../../../apollo-client";
+import gql from "graphql-tag";
 import { useParams } from "next/navigation";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
@@ -10,13 +11,26 @@ import Loading from "@/components/ui/Loading";
 import Error from "@/components/ui/Error";
 
 interface AnimalData {
-  id: number;
-  name: string;
-  main_image: string;
-  images: string[];
-  description: string;
-  age: string;
-  sex: string;
+  title: string;
+  databaseId: number;
+  featuredImage: {
+    node: {
+      id: string;
+      uri: string;
+    };
+  };
+  zwierzetaAcf: {
+    wiek: string;
+    plec: string;
+    typ: string;
+    opis: string;
+    galeria: {
+      nodes: {
+        id: string;
+        uri: string;
+      }[];
+    };
+  };
 }
 
 export default function Animal() {
@@ -30,20 +44,43 @@ export default function Animal() {
   const id = params.id;
 
   useEffect(() => {
-    axios
-      .get<{ data: AnimalData }>(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/animals/${id}`
-      )
-      .then((response) => {
-        setAnimal(response.data.data);
-      })
-      .catch((error) => {
-        console.error(error.message);
-        setError(error.message);
-      })
-      .finally(() => {
-        setLoading(false);
+    setLoading(true);
+    const fetchData = async () => {
+      const { data } = await client.query({
+        query: gql`
+          query GetPortfolioById($id: ID!) {
+            zwierze(id: $id, idType: DATABASE_ID) {
+              title
+         
+              databaseId
+              featuredImage {
+                node {
+                  id
+                  uri
+                }
+              }
+              zwierzetaAcf {
+                wiek
+                plec
+                typ
+                opis
+                galeria {
+                  nodes {
+                    id
+                    uri
+                  }
+                }
+              }
+            }
+          }
+        `,
+        variables: { id }, // 👈 Pass the ID variable here
       });
+    
+      setAnimal(data.zwierze);
+      setLoading(false);
+    };
+    fetchData();
   }, [id]);
 
   if (loading) return <Loading additionalStyles="h-[70vh]" />;
@@ -51,17 +88,17 @@ export default function Animal() {
   if (error || !animal) return <Error />;
 
   const allImages = [
-    { src: process.env.NEXT_PUBLIC_API_IMAGES_URL + animal.main_image },
-    ...animal.images.map((img) => ({
-      src: process.env.NEXT_PUBLIC_API_IMAGES_URL + img,
+    { src: process.env.NEXT_PUBLIC_API_IMAGES_URL + animal.featuredImage.node.uri },
+    ...animal.zwierzetaAcf.galeria.nodes.map((img) => ({
+      src: process.env.NEXT_PUBLIC_API_IMAGES_URL + img.uri,
     })),
   ];
-
+console.log("Animal data:", animal.featuredImage.node.uri); // 👀
   return (
     <div className="container py-16">
       <div>
         <h1 className="text-[48px] font-semibold leading-[60px]">
-          {animal.name}
+          {animal.title}
         </h1>
         <span className="flex items-center gap-2 mt-4">
           <img
@@ -69,7 +106,7 @@ export default function Animal() {
             src="/icons/locationRed.svg"
             alt="Location Icon"
           />
-          Azyl Psów Zapomnianych w Wotczynie
+          Azyl Psów Zapomnianych w Wołczynie
         </span>
       </div>
 
@@ -80,7 +117,7 @@ export default function Animal() {
               Galeria
             </h5>
             <img
-              src={process.env.NEXT_PUBLIC_API_IMAGES_URL + animal.main_image}
+              src={process.env.NEXT_PUBLIC_API_IMAGES_URL + animal.featuredImage.node.uri}
               alt="Główne zdjęcie zwierzaka"
               className="w-full max-h-[500px] md:max-h-[600px] border-img object-cover  cursor-pointer "
               onClick={() => {
@@ -92,10 +129,10 @@ export default function Animal() {
 
           {/* Thumbnails */}
           <div className="flex flex-wrap gap-4 overflow-x-auto">
-            {animal.images.map((img, i) => (
+            {animal.zwierzetaAcf.galeria.nodes.map((img, i) => (
               <img
                 key={i}
-                src={process.env.NEXT_PUBLIC_API_IMAGES_URL + img}
+                src={process.env.NEXT_PUBLIC_API_IMAGES_URL + img.uri}
                 alt={`Miniaturka ${i + 1}`}
                 className="w-[calc(50%-0.5rem)] sm:w-[calc(33%-0.5rem)] lg:w-[calc(25%-0.5rem)] h-40  object-cover cursor-pointer border-img"
                 onClick={() => {
@@ -118,30 +155,28 @@ export default function Animal() {
         </div>
 
         <div className="w-full md:w-1/2 space-y-8">
-          <p>{animal.description}</p>
+          <p>{animal.zwierzetaAcf.opis}</p>
           <div className="flex items-center gap-8">
             <span className="flex gap-2">
               <img src="/icons/calendar.svg" />
-              Wiek: {animal.age}
+              Wiek: {animal.zwierzetaAcf.wiek}
             </span>
             <span className="flex gap-2">
               <img
                 src={`${
-                  animal.sex == "Samiec"
+                  animal.zwierzetaAcf.plec == "Samiec"
                     ? "/icons/sexBlue.svg"
                     : "/icons/sexPink.svg"
                 }`}
               />
-              Płeć: {animal.sex}
+              Płeć: {animal.zwierzetaAcf.plec}
             </span>
           </div>
 
           <h3 className="font-semibold text-[24px] leading-[32px]">
             Zapytaj o adopcję
           </h3>
-          <div>
-            
-          </div>
+          <div></div>
           <ContactForm additionalStyles="md:w-full" />
           <p className="text-sm">
             Adopcja zwierzaka to odpowiedzialna decyzja, która daje mu drugą
