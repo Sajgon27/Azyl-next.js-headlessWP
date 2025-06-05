@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   title: "Strona główna",
   description: "| Azyl Psów Zapomnianych w Wołczynie",
 };
+console.log("API Image Base URL:", process.env.NEXT_PUBLIC_API_IMAGES_URL);
 
 export default function RootLayout({
   children,
