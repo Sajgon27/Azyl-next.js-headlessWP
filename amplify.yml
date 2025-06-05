@@ -7,13 +7,12 @@ frontend:
     build:
       commands:
         - env | grep -e NEXT_PUBLIC_API_IMAGES_URL >> .env.production
-        - env | grep -e NEXT_PUBLIC_API_BASE_URL >> .env.production
         - npm run build
   artifacts:
     baseDirectory: .next
     files:
       - '**/*'
-  cache:
+  cache: 
     paths:
       - node_modules/**/*
 
