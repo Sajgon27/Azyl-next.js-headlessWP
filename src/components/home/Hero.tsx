@@ -7,7 +7,6 @@ import Image from "next/image";
 export default function Hero() {
   return (
     <section className="relative flex items-center justify-center overflow-hidden md:mb-22">
-  
       <div className="absolute inset-0 bg-white opacity-20 -z-10"></div>
       <div className="container py-12 md:py-28 lg:py-42 flex flex-wrap md:flex-nowrap flex-row gap-18 items-stretch justify-between">
         <div className="w-full md:w-1/2 flex flex-col gap-y-5">
@@ -17,10 +16,12 @@ export default function Hero() {
           <p className="">
             Azyl Psów Zapomnianych w Wołczynie to schronisko, które daje
             schronienie, opiekę i szansę na nowe życie bezdomnym oraz porzuconym
-            psom i kotom. <br/><br/>Dzięki zaangażowaniu wolontariuszy i darczyńców
-            zapewnia im wyżywienie, leczenie oraz poszukiwanie kochających
-            domów. Placówka działa na rzecz poprawy losu zwierząt, promując
-            adopcję i odpowiedzialną opiekę nad czworonogami.
+            psom i kotom. <br />
+            <br />
+            Dzięki zaangażowaniu wolontariuszy i darczyńców zapewnia im
+            wyżywienie, leczenie oraz poszukiwanie kochających domów. Placówka
+            działa na rzecz poprawy losu zwierząt, promując adopcję i
+            odpowiedzialną opiekę nad czworonogami.
           </p>
           <Button
             additionalStyles="w-auto self-start"

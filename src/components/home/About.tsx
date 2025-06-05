@@ -48,7 +48,7 @@ export default function About() {
         initial={{ opacity: 0, x: -50 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-        viewport={{ once: true }} 
+        viewport={{ once: true }}
       >
         <span className="text-primary font-medium">O NAS</span>
         <h3 className="text-[2.5rem] sm:text-[3rem] font-semibold leading-[3.2rem] mt-4 mb-8">
@@ -67,21 +67,21 @@ export default function About() {
           leczenie oraz poszukiwanie kochających domów. Placówka działa na rzecz
           poprawy losu zwierząt, promując adopcję i odpowiedzialną opiekę nad
           czworonogami.
-          <br/> <br/>
-             Azyl Psów Zapomnianych w Wołczynie to schronisko, które daje
+          <br /> <br />
+          Azyl Psów Zapomnianych w Wołczynie to schronisko, które daje
           schronienie, opiekę i szansę na nowe życie bezdomnym oraz porzuconym
           psom i kotom. Dzięki zaangażowaniu wolontariuszy i darczyńców zapewnia
           im wyżywienie, leczenie oraz poszukiwanie kochających domów. Placówka
           działa na rzecz poprawy losu zwierząt, promując adopcję i
-          odpowiedzialną opiekę nad czworonogami. 
+          odpowiedzialną opiekę nad czworonogami.
         </p>
-          <Button
-            additionalStyles="w-fit self-start mt-8"
-            href="tel:+48 668 782 325"
-            bgColor="red"
-            icon="/icons/phone.svg"
-            text="Skontatuj się z nami"
-          />
+        <Button
+          additionalStyles="w-fit self-start mt-8"
+          href="tel:+48 668 782 325"
+          bgColor="red"
+          icon="/icons/phone.svg"
+          text="Skontatuj się z nami"
+        />
       </motion.div>
     </motion.div>
   );

@@ -6,20 +6,15 @@ import Sponsors from "@/components/home/Sponsors";
 import Contact from "@/components/home/Contact";
 import AnimalsCatalog from "@/components/home/AnimalsCatalog";
 
-
-export default function Home () {
+export default function Home() {
   return (
     <>
-      <Hero/>
-      <AnimalsCatalog/>
-        <Sponsors/>
+      <Hero />
+      <AnimalsCatalog />
+      <Sponsors />
       <About />
-    
-     <HomeGallery/>
-     
-     <Contact/>
+      <HomeGallery />
+      <Contact />
     </>
   );
-};
-
-
+}
