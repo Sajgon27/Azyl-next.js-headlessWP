@@ -13,7 +13,7 @@ interface AnimalCardProps {
 function AnimalCard({ href, name, age, sex, image }: AnimalCardProps) {
   return (
     <Link href={href} className="flex flex-col ">
-      <Image
+      <img
       width={400}
       height={800}
         alt={name}

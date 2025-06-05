@@ -7,6 +7,7 @@ import Contact from "@/components/home/Contact";
 import AnimalsCatalog from "@/components/home/AnimalsCatalog";
 
 export default function Home() {
+  console.log("API Image Base URL:", process.env.NEXT_PUBLIC_API_IMAGES_URL);
   return (
     <>
       <Hero />
