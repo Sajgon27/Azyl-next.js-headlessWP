@@ -10,7 +10,25 @@ import { gql } from "@apollo/client";
 import client from "../../graphql/apollo-client";
 
 function AnimalsCatalog() {
-  const [animals, setAnimals] = useState([] as any[]);
+
+
+  type AnimalData = {
+    title: string;
+    databaseId: number;
+    featuredImage: {
+      node: {
+        id: string;
+        uri: string;
+      };
+    };
+    zwierzetaAcf: {
+      wiek: string;
+      plec: string[];
+      typ: string[];
+    };
+  }
+
+  const [animals, setAnimals] = useState([] as AnimalData[]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   useEffect(() => {
@@ -60,7 +78,7 @@ function AnimalsCatalog() {
   };
 
   const filteredAnimals = animals.filter(
-    (animal: any) => animal.zwierzetaAcf.typ[0] === psyOrKoty
+    (animal: AnimalData) => animal.zwierzetaAcf.typ[0] === psyOrKoty
   );
   console.log("Filtered Animals:", filteredAnimals);
 
@@ -120,7 +138,7 @@ function AnimalsCatalog() {
           }}
         >
           <AnimatePresence mode="popLayout">
-            {filteredAnimals.slice(0, visibleCount).map((animal: any) => (
+            {filteredAnimals.slice(0, visibleCount).map((animal: AnimalData) => (
               <motion.div
                 key={animal.databaseId}
                 initial="hidden"

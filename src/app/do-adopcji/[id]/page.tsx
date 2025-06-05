@@ -9,6 +9,7 @@ import "yet-another-react-lightbox/styles.css";
 import ContactForm from "@/components/ContactForm";
 import Loading from "@/components/ui/Loading";
 import Error from "@/components/ui/Error";
+import Image from "next/image";
 
 interface AnimalData {
   title: string;
@@ -107,7 +108,9 @@ export default function Animal() {
           {animal.title}
         </h1>
         <span className="flex items-center gap-2 mt-4">
-          <img
+          <Image
+          width={24}
+          height={24}
             className="size-6"
             src="/icons/locationRed.svg"
             alt="Location Icon"
@@ -122,7 +125,9 @@ export default function Animal() {
             <h5 className="text-[36px] font-semibold block md:hidden mb-4">
               Galeria
             </h5>
-            <img
+            <Image
+            width={800}
+            height={500}
               src={
                 process.env.NEXT_PUBLIC_API_IMAGES_URL +
                 animal.featuredImage.node.uri
@@ -139,7 +144,9 @@ export default function Animal() {
           {/* Thumbnails */}
           <div className="flex flex-wrap gap-4 overflow-x-auto">
             {animal.zwierzetaAcf.galeria.nodes.map((img, i) => (
-              <img
+              <Image
+              width={300}
+              height={300}
                 key={i}
                 src={process.env.NEXT_PUBLIC_API_IMAGES_URL + img.uri}
                 alt={`Miniaturka ${i + 1}`}
@@ -167,11 +174,14 @@ export default function Animal() {
           <p>{animal.zwierzetaAcf.opis}</p>
           <div className="flex items-center gap-8">
             <span className="flex gap-2">
-              <img src="/icons/calendar.svg" />
+              <Image width={24} height={24} alt="Kalendarz" src="/icons/calendar.svg" />
               Wiek: {animal.zwierzetaAcf.wiek}
             </span>
             <span className="flex gap-2">
-              <img
+              <Image
+                width={24}
+                height={24}
+              alt="Płeć"
                 src={`${
                   animal.zwierzetaAcf.plec == "Samiec"
                     ? "/icons/sexBlue.svg"

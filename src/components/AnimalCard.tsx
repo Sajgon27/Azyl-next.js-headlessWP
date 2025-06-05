@@ -13,7 +13,10 @@ interface AnimalCardProps {
 function AnimalCard({ href, name, age, sex, image }: AnimalCardProps) {
   return (
     <Link href={href} className="flex flex-col ">
-      <img
+      <Image
+      width={400}
+      height={800}
+        alt={name}
         className="w-full hover:scale-[1.01] transition-transform duration-700 ease-in-out object-cover h-[320px] sm:h-[300px] md:h-[420px] border-img"
         src={image}
       />
