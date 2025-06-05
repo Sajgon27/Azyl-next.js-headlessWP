@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Button from "../ui/Button";
-import { DivideIcon } from "@heroicons/react/20/solid";
+
 
 export default function About() {
   return (
