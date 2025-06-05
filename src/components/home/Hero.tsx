@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 export default function Hero() {
+  //Hero
   return (
     <section className="relative flex items-center justify-center overflow-hidden md:mb-22">
       <div className="absolute inset-0 bg-white opacity-20 -z-10"></div>
@@ -64,6 +65,7 @@ export default function Hero() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
+            
             <Image
               src="/images/hero/hero4.jpg"
               alt="Hero 4"
