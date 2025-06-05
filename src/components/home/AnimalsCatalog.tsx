@@ -84,12 +84,12 @@ function AnimalsCatalog() {
 
 
   return (
-    <div id="adoption" className="container py-20">
+    <div id="adoption" className="container py-8 sm:py-20">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
-        <h2 className="text-[2.5rem] font-semibold leading-[37px]">
+        <h2 className="text-[2rem] w-full sm:text-[2.5rem] font-semibold leading-[37px]">
           Zwierzęta do adopcji
         </h2>
-        <div className="flex flex-row gap-8 mt-5 md:mt-auto">
+        <div className="flex w-full justify-between sm:justify-end flex-row gap-8 mt-5 md:mt-auto">
           <Button
             additionalStyles="w-auto self-start"
             bgColor={psyOrKoty === "Pies" ? "red" : "white"}

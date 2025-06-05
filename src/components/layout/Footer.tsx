@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 export default function Footer() {
   return (
-    <footer className="w-full pt-12 md:pt-auto md:py-12 mt-12 bg-[#FFD0C2]">
+    <footer className="w-full pt-12 md:pt-auto md:py-12 mt-12 bg-[#eee7e5]">
       <div className="container flex items-start flex-wrap md:flex-nowrap md:items-center">
         <div className="w-1/2 md:w-[30%]">
           <Image

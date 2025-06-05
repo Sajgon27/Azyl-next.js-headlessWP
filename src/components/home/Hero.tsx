@@ -9,7 +9,7 @@ export default function Hero() {
   return (
     <section className="relative flex items-center justify-center overflow-hidden md:mb-22">
       <div className="absolute inset-0 bg-white opacity-20 -z-10"></div>
-      <div className="container py-12 md:py-28 lg:py-42 flex flex-wrap md:flex-nowrap flex-row gap-18 items-stretch justify-between">
+      <div className="container py-12 md:py-28 lg:py-42 flex flex-wrap md:flex-nowrap flex-row gap-4 md:gap-18 items-stretch justify-between">
         <div className="w-full md:w-1/2 flex flex-col gap-y-5">
           <h1 className="text-[2rem] xl:text-[3rem] font-semibold  ">
             Daj dom, zyskaj miłość
@@ -34,7 +34,7 @@ export default function Hero() {
         </div>
         <div className="w-full md:w-1/2 text-center relative gap-2 justify-around flex flex-wrap lg:block">
           <motion.div
-            className="w-[35%] lg:size-76 lg:absolute left-5 -top-14 z-1 object-cover"
+            className="w-[35%] hidden lg:block lg:size-78 lg:absolute left-5 -top-14 z-1 object-cover"
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -47,7 +47,7 @@ export default function Hero() {
             />
           </motion.div>
           <motion.div
-            className="w-[60%] lg:w-82 h-62 cover lg:absolute right-5 -top-20 z-1 object-cover"
+            className="w-[60%] hidden lg:block lg:w-82 h-62 cover lg:absolute right-5 -top-20 z-1 object-cover"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -60,7 +60,7 @@ export default function Hero() {
             />
           </motion.div>
           <motion.div
-            className="w-[60%] lg:w-82 h-68 lg:absolute -bottom-20 left-16 z-3 object-cover"
+            className="w-[60%] hidden lg:block  lg:w-82 h-68 lg:absolute -bottom-20 left-16 z-3 object-cover"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
@@ -74,7 +74,7 @@ export default function Hero() {
             />
           </motion.div>
           <motion.div
-            className="w-[30%] lg:size-68 lg:absolute -right-1 -bottom-2 z-3 object-cover"
+            className="w-full h-[400px] lg:h-[300px] lg:w-[50%] lg:size-68 relative lg:absolute -right-1 -bottom-2 z-3 object-cover"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}

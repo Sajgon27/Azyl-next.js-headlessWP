@@ -1,20 +1,21 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Button from "../ui/Button";
+import { DivideIcon } from "@heroicons/react/20/solid";
 
 export default function About() {
   return (
     <motion.div
       id="about"
-      className="container flex flex-col-reverse lg:flex-row  lg:gap-28 pt-20 lg:py-28"
+      className="container flex flex-col-reverse md:flex-row md:gap-12  lg:gap-28 pt-20 md:py-20 lg:py-28"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
       viewport={{ once: true }}
     >
-      <div className="w-full mt-5 lg:mt-0 lg:w-[45%] relative">
+      <div className="w-full mt-5 md:mt-0 md:w-[45%] relative">
         <motion.div
-          className="w-[45%] md:w-full max-h-[400px] md:max-h-[800px] h-[300px] md:h-[800px] object-cover  relative"
+          className="w-[45%] hidden lg:block md:w-full max-h-[400px] md:max-h-[800px] h-[300px] md:h-[800px] object-cover  relative"
           initial={{ scale: 0.9, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -24,27 +25,22 @@ export default function About() {
             src="/images/onas/image-o-nas-1.jpeg"
             alt="O nas zdjęcie 1"
             fill
-            className="border-img object-cover hidden lg:block"
+            className="border-img object-cover hidden md:block"
           />
         </motion.div>
-        <motion.div
-          className=" lg:absolute w-full lg:w-60 h-40 sm:h-90 lg:h-80 -bottom-10 -right-10 z-50"
-          initial={{ x: 50, opacity: 0 }}
-          whileInView={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
-          viewport={{ once: true }}
-        >
+        <div className=" lg:absolute w-full lg:w-60 h-120 lg:h-90 md:h-180 lg:-bottom-10 lg:-right-10 z-50">
           <Image
             src="/images/onas/image-o-nas-2.jpeg"
             alt="O nas zdjęcie 2"
-            fill
-            className="border-img object-cover"
+            width={400}
+            height={600}
+            className="sm:border-img w-full h-full object-cover rounded-xl"
           />
-        </motion.div>
+        </div>
       </div>
 
       <motion.div
-        className="w-full lg:w-1/2 mb-4 lg:mb-0"
+        className="w-full md:w-1/2 mb-4 lg:mb-0"
         initial={{ opacity: 0, x: -50 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}

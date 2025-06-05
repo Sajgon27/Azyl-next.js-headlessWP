@@ -4,7 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
-
+import Image from "next/image";
 import Button from "../ui/Button";
 
 export default function Header() {
@@ -37,7 +37,7 @@ export default function Header() {
     <header className="w-full py-4 shadow-md bg-white">
       <div className="container flex justify-between items-center gap-4 lg:gap-8">
         <Link className="md:flex-1 flex-0" href="/">
-          <img className="max-w-[80px]" src="/logo.png" alt="Logo" />
+          <Image width={80} height={80} className="max-w-[60px] sm:max-w-[80px]" src="/logo.png" alt="Logo" />
         </Link>
         {/* Desktop Navigation */}
         <nav className="hidden md:flex gap-6 lg:gap-10 lg:text-[18px]">
@@ -77,7 +77,7 @@ export default function Header() {
         </div>
 
         <button
-          className="md:hidden"
+          className="-mb-2 md:hidden"
           onClick={() => setIsOpen(!isOpen)}
           ref={buttonRef}
         >
